@@ -12,23 +12,23 @@ export default function FacebookLogin(){
                 <View style={styles.content}>
                     <TextInput style={[styles.input, styles.inputUsername]}placeholder="Número de telefone ou e-mail" placeholderTextColor="#cdcdcf"/> 
                     <TextInput style={[styles.input, styles.inputPassword]}placeholder="Senha" placeholderTextColor="#cdcdcf" secureTextEntry={true}/> 
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
                         <Text> Conecte-se </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.link}>
                         <Text> Esqueceu a senha? </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.link}>
                         <Text> Volte </Text>
                     </TouchableOpacity>
                 </View>
-                <View>
-                    <View>
-                        <View/>
+                <View style={styles.footer}>
+                    <View style={styles.divider}>
+                        <View style={styles.dividerLine}/>
                         <Text> OU </Text>
-                        <View/>
+                        <View style={styles.dividerLine}/>
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity style={styles.button}>
                         <Text> Criar uma nova conta </Text>
                     </TouchableOpacity>
                 </View> 
