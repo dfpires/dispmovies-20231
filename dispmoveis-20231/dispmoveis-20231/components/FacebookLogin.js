@@ -66,5 +66,31 @@ const styles = StyleSheet.create({
     },
     content: {
         padding: 22
-    } 
+    },
+    button: {
+        height: 42,
+        borderRadius: 6,
+        backgroundColor: "#1977f3",
+        justifyContent: "center",
+        marginVertical: 15
+    },
+    link: {
+        paddingVertical: 8
+    },
+    footer: {
+        alignItems: "center",
+        padding: 22,
+        paddingBottom: 0    
+    },
+    divider: {
+        flexDirection: "row",
+        alignItems: "center",
+        width: "70%",
+        marginBottom: 10
+    },
+    dividerLine: {
+        flex: 1,
+        borderBottomWidth: 1,
+        borderColor: "#cbccd0"
+    }  
 })
