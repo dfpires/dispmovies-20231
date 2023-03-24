@@ -1,8 +1,16 @@
-import { SafeAreaView, StatusBar, View, Text, StyleSheet } from "react-native";
+import { SafeAreaView, StatusBar, View, Text, StyleSheet, TextInput } from "react-native";
 import Constants from 'expo-constants'
 import {Formik} from 'formik'
 import {validationSchema} from './validation'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
+
+const ErrorMessage = ({errorValue}) => {
+    return errorValue ? (
+        <View style={styles.errorContainer}>
+            <Text style={styles.errorText}> {errorValue} </Text>
+        </View> 
+    ) : null
+}
 export default function SignUp(){
     function onSubmitHandler(values){
         console.log(values)
@@ -39,7 +47,32 @@ export default function SignUp(){
                             <KeyboardAwareScrollView
                                 style={styles.content}
                                 showsVerticalScrollIndicator={false}>
-                                {/* CONTINUA AQUI */}
+                                <View style={styles.formGroup}>
+                                    <Text style={styles.label}> First Name</Text>
+                                    <TextInput 
+                                        style={styles.input}
+                                        value={values.firstName}
+                                        onChangeText={handleChange("firstName")}
+                                        onBlur={handleBlur("firstName")}/>
+                                    <ErrorMessage errorValue={touched.firstName && errors.firstName}/>
+                                </View>
+                                <View style={styles.formGroup}>
+                                    <Text style={styles.label}> Last Name</Text>
+                                    <TextInput 
+                                        style={styles.input}
+                                        value={values.lastName}
+                                        onChangeText={handleChange("lastName")}
+                                        onBlur={handleBlur("lastName")}/>
+                                </View>
+                                <View style={styles.formGroup}>
+                                    <Text style={styles.label}> Email Address</Text>
+                                    <TextInput 
+                                        style={styles.input}
+                                        value={values.email}
+                                        onChangeText={handleChange("email")}
+                                        onBlur={handleBlur("email")}/>
+                                    <ErrorMessage errorValue={touched.email && errors.email}/>
+                                </View>
                             </KeyboardAwareScrollView>
                         )}
                 </Formik>
@@ -48,6 +81,22 @@ export default function SignUp(){
     )
 }
 const styles = StyleSheet.create({
+    errorContainer: {
+        marginVertical: 5,
+    },
+    errorText: {
+        color: "#ff7675"
+    },
+    formGroup: {
+        marginTop: 10
+    },
+    label: {
+        color: "#7d7e79", fontSize: 16, lineHeight: 30
+    },
+    input: {
+        height: 50, paddingHorizontal: 20, borderRadius: 5,
+        borderWidth: 2, borderColor: "#e3e3e3", backgroundColor: "#fff"
+    },
     topSafeArea: {
         backgroundColor: "#3498db"
     },
