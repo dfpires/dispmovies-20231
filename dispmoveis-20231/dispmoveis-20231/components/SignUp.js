@@ -1,4 +1,4 @@
-import { SafeAreaView, StatusBar, View, Text, StyleSheet, TextInput } from "react-native";
+import { SafeAreaView, StatusBar, View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import Constants from 'expo-constants'
 import {Formik} from 'formik'
 import {validationSchema} from './validation'
@@ -73,6 +73,27 @@ export default function SignUp(){
                                         onBlur={handleBlur("email")}/>
                                     <ErrorMessage errorValue={touched.email && errors.email}/>
                                 </View>
+                                <View style={styles.formGroup}>
+                                    <Text style={styles.label}> Password</Text>
+                                    <TextInput 
+                                        style={styles.input}
+                                        value={values.password}
+                                        onChangeText={handleChange("password")}
+                                        onBlur={handleBlur("password")}/>
+                                    <ErrorMessage errorValue={touched.password && errors.password}/>
+                                </View>
+                                <View style={styles.formGroup}>
+                                    <Text style={styles.label}> Confirm Password</Text>
+                                    <TextInput 
+                                        style={styles.input}
+                                        value={values.confirmPassword}
+                                        onChangeText={handleChange("confirmPassword")}
+                                        onBlur={handleBlur("confirmPassword")}/>
+                                    <ErrorMessage errorValue={touched.confirmPassword && errors.confirmPassword}/>
+                                </View>
+                                <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+                                    <Text style={styles.buttonText}> SUBMIT </Text>
+                                </TouchableOpacity>
                             </KeyboardAwareScrollView>
                         )}
                 </Formik>
@@ -81,6 +102,13 @@ export default function SignUp(){
     )
 }
 const styles = StyleSheet.create({
+    button: {
+        marginTop: 20, backgroundColor: "#2980b9", padding: 15, borderRadius: 15
+        
+    },
+    buttonText: {
+        color: "#fff", fontWeight: "bold", fontSize: 18, textAlign: "center"
+    },
     errorContainer: {
         marginVertical: 5,
     },
