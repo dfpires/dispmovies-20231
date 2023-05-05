@@ -1,10 +1,29 @@
-import { SafeAreaView, StatusBar, TouchableOpacity } from "react-native";
+import { SafeAreaView, StatusBar, TouchableOpacity, View , Image, StyleSheet, FlatList} from "react-native";
 import {Feather} from "@expo/vector-icons"
 import Constants from "expo-constants"
-
 const instagram_logo = "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/1200px-Instagram_logo.svg.png"
 
+import data from './data'
+import Article from './Article'
+import Stories from './Stories'
+
 export default function Instagram() {
+
+    function renderItem({item, index}){
+        if (index == 0){ // cria stories
+            return (
+                <>
+                    <View>
+                        <Stories stories={data.stories} profile={data.profile}/> 
+                    </View>
+                    <Article item={item}/>
+                </>
+            )
+        }
+        else {
+            return <Article item={item}/>
+        }
+    }
     return (
         <SafeAreaView style={styles.container}>
             <StatusBar style="dark"/>
@@ -17,6 +36,11 @@ export default function Instagram() {
                     <Feather name="send" size={24}/>
                 </TouchableOpacity>
             </View>
+            <FlatList 
+                data={data.articles}
+                renderItem={renderItem}
+                keyExtrator={(item) => item.id.toString()}
+                showsVerticalScrollIndicator={false}/>
         </SafeAreaView>
     )
 }
@@ -34,7 +58,6 @@ const styles = StyleSheet.create({
         alignItens: "center",
         paddingHorizontal: 16,
         height: 44
-
     },
     container: {
         flex: 1,
