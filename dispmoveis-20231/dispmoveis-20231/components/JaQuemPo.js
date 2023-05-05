@@ -1,7 +1,8 @@
-import {useState} from 'react'
-import { SafeAreaView, View, Text, StyleSheet } from "react-native";
+import {useState, useRef} from 'react'
+import { SafeAreaView, View, Text, StyleSheet, Animated } from "react-native";
 import Constants from 'expo-constants'
 import Actions from './Actions'
+import DisplayResult from './DisplayResult';
 
 export default function JaQuemPo(){
     const [userChoice, setUserChoice] = useState(null)
@@ -9,9 +10,11 @@ export default function JaQuemPo(){
     const [result, setResult] = useState("")
     const [canPlay, setPlay] = useState(true)
 
+    const fadeAnimation = useRef(new Animated.Value(0)).current
+
     function play(choice){ // 1 - rock, 2 - paper 3 - scissors
-        const randomPcChoice = (Math.random() * 3 ) + 1
-        const resultString = ""
+        const randomPcChoice = Math.floor((Math.random() * 3 )) + 1
+        let resultString = ""
 
         if (choice == 1){
             resultString = randomPcChoice === 3 ? "WIN": "LOSE"
@@ -27,15 +30,41 @@ export default function JaQuemPo(){
         }
         setPcChoice(randomPcChoice)
         setUserChoice(choice)
+
+        setTimeout( () => {
+            setResult(resultString)
+        }, 300)
+
+        Animated.sequence([
+            Animated.timing(fadeAnimation, {
+                toValue: 0,
+                duration: 300,
+                useNativeDriver: true
+            }),
+            Animated.timing(fadeAnimation, {
+                toValue: 1,
+                duration: 300,
+                useNativeDriver: true
+            }).start()
+        ])
+
+        setPlay(false)
+        setTimeout( () => {
+            setPlay(true)
+        }, 600)
     }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.content}>
                 <View style={styles.result}>
-                    <Text style={styles.readyText}> Let´s Play </Text> 
+                    <Animated.Text style={[styles.resultText, {opacity: fadeAnimation}]}>
+                            {result}
+                    </Animated.Text>                    
                 </View>
                 <View style={styles.screen}>
-
+                    { !result ? (<Text style={styles.readyText}> Let´s Play </Text> ) : 
+                        <DisplayResult userChoice={userChoice} computerChoice={pcChoice}/>
+                    }
                 </View>
                 <Actions play={play} canPlay={canPlay}/>
             </View>
@@ -56,6 +85,9 @@ const styles = StyleSheet.create({
         height: 100,
         justifyContent: "flex-end",
         alignItems: "center",
+    },
+    resultText: {
+        fontSize: 48, fontWeight: "bold"
     },
     screen: {
         flex: 1,
