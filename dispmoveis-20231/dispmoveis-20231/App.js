@@ -7,6 +7,7 @@ import SignUp from "./components/SignUp";
 import Instagram from './components/Instagram'
 import FacebookLogin from './components/FacebookLogin'
 import JaQuemPo from './components/JaQuemPo'
+import CalculadoraImc from './components/CalculadoraImc'
 
 
 export default function App(){
@@ -17,5 +18,6 @@ export default function App(){
    // return <FacebookLogin/>
  //  return <SignUp/>
  // return <Instagram/>
- return <JaQuemPo/>
+ // return <JaQuemPo/>
+ return <CalculadoraImc/>
 } 

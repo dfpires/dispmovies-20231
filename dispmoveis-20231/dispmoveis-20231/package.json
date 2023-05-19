@@ -16,6 +16,7 @@
     "expo-constants": "~13.2.4",
     "@expo/vector-icons": "^13.0.0",
     "react-native-paper": "4.9.2",
+    "@react-native-community/slider": "4.2.3",
     "react-native-keyboard-aware-scroll-view": "*"
   },
   "devDependencies": {
